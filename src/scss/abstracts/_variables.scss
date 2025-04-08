@@ -5,3 +5,14 @@ $screen-lg-min: 992px;
 $screen-xl-min: 1200px;
 
 // colors
+$primary-color: #3f72af;
+$secondary-color: #dbe2ef;
+
+$background-color: $secondary-color;
+$header-bg-color: $primary-color;
+$link-color: $secondary-color;
+$link-active-color: #8fb6ff;
+
+$text-black: #000;
+$text-white: #fff;
+$text-blue: $primary-color;

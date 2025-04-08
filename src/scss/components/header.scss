@@ -1,0 +1,14 @@
+.header {
+  background-color: $header-bg-color;
+  padding: 0 24px;
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 65px;
+  }
+  &__title {
+    margin: 0;
+    color: $text-white;
+  }
+}
