@@ -3,11 +3,12 @@ import { Route, Routes } from 'react-router';
 import Header from './components/Header';
 import List from './components/taskCategoryList/List';
 import { useEffect, useState } from 'react';
-import { Category, Tasks } from './types/api';
+import { Category, Task } from './types/api';
 import api from './utils/apiController';
+import AddTask from './components/forms/AddTask';
 
 function App() {
-  const [tasks, setTasks] = useState<Tasks[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -23,10 +24,10 @@ function App() {
       } catch (error) {
         console.error('Ошибка при загрузке:', error);
       } finally {
-        // setTimeout(() => {
-        //   setLoading(false);
-        // }, 5000);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+        // setLoading(false);
       }
     }
     fetchData();
@@ -45,7 +46,8 @@ function App() {
           <Route
             path="/categories"
             element={<List data={categories} loading={loading} />}
-          />
+          />{' '}
+          <Route path="/testform" element={<AddTask />} />
         </Routes>
       </main>
     </>

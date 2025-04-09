@@ -1,10 +1,10 @@
-import { Tasks, Category } from '../../types/api';
+import { Task, Category } from '../../types/api';
 import { Icon } from '@iconify/react';
 function ListItem({
   data,
   category,
 }: {
-  data: Tasks | Category;
+  data: Task | Category;
   category?: Category;
 }) {
   return (

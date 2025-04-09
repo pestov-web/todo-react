@@ -11,6 +11,10 @@ const navMenu: NavMenu[] = [
     name: 'Категории',
     href: '/categories',
   },
+  {
+    name: 'тестовая форма',
+    href: '/testform',
+  },
 ];
 
 export default navMenu;

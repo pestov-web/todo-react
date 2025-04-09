@@ -1,4 +1,4 @@
-import { Tasks, Category } from '../../types/api';
+import { Task, Category } from '../../types/api';
 import ListItem from './ListItem';
 import ListSkeleton from './ListSkeleton';
 
@@ -7,7 +7,7 @@ function List({
   categories,
   loading,
 }: {
-  data: Tasks[] | Category[];
+  data: Task[] | Category[];
   categories?: Category[];
   loading: boolean;
 }) {
@@ -18,7 +18,7 @@ function List({
       <ul className="list">
         {data.map((item) => {
           const category = categories?.find(
-            (cat) => cat.id === item.categoryId
+            (cat) => cat.id === (item as Task).categoryId
           );
           return (
             <li key={item.id} className="list__item">

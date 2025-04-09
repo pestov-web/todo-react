@@ -4,8 +4,8 @@ interface Category {
   description: string;
 }
 
-interface Tasks extends Category {
+interface Task extends Category {
   categoryId: number;
 }
 
-export type { Category, Tasks };
+export type { Category, Task };

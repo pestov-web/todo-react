@@ -55,7 +55,7 @@ function AddTask() {
               id="description"
               name="description"
               type="textarea"
-              className="form__input"
+              className="form__input form__input-textarea"
             />
           </label>
 
