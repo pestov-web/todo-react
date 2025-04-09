@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import navMenu from '../utils/data-placeholder';
 function NavMenu() {
   return (
@@ -5,9 +6,9 @@ function NavMenu() {
       <ul className="nav__list">
         {navMenu.map((item) => (
           <li key={item.name} className="nav__list-item">
-            <a href={item.href} className="nav__list-item-link">
+            <Link to={item.href} className="nav__list-item-link">
               {item.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

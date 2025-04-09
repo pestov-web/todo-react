@@ -1,18 +1,25 @@
 import { Tasks, Category } from '../../types/api';
 import { Icon } from '@iconify/react';
-function ListItem({ task, category }: { task: Tasks; category?: Category }) {
-  if (!task || !category) return null;
+function ListItem({
+  data,
+  category,
+}: {
+  data: Tasks | Category;
+  category?: Category;
+}) {
   return (
     <div className="list-item">
       <div className="list-item__info">
         <div className="list-item__header">
-          <h2 className="list-item__title">{task.name}</h2>
-          <span className="list-item__category">
-            <Icon icon="mdi:folder" className="list-item__category-icon" />
-            {category.name}
-          </span>
+          <h2 className="list-item__title">{data.name}</h2>
+          {category && (
+            <span className="list-item__category">
+              <Icon icon="mdi:folder" className="list-item__category-icon" />
+              {category.name}
+            </span>
+          )}
         </div>
-        <p className="list-item__description">{task.description}</p>
+        <p className="list-item__description">{data.description}</p>
       </div>
       <div className="list-item__actions">
         <button className="button list-item__button">
