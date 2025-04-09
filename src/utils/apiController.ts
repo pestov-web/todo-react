@@ -1,120 +1,106 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Category, Tasks } from '../types/api';
+
 class Api {
-  baseUrl: string;
+  private baseUrl: string;
+
   constructor(url: string) {
     this.baseUrl = url;
   }
-  // получаем тудушки
-  async getTasks(): Promise<Tasks> {
+
+  // POST
+  private async post<T>(endpoint: string, data?: object): Promise<T> {
     try {
-      const response: Tasks = await axios.get(`${this.baseUrl}/GetTasks`);
-      console.log(response);
-      return response;
+      const response: AxiosResponse<T> = await axios.post(
+        `${this.baseUrl}${endpoint}`,
+        data
+      );
+      return response.data;
     } catch (error) {
       console.error(error);
-      throw new Error(`${error}, Failed to fetch`);
+      throw new Error(`Failed to POST to ${endpoint}: ${error}`);
     }
   }
-  //  получаем категории
-  async getCategories(): Promise<Category> {
+
+  // Получение всех задач
+  async getTasks(): Promise<Tasks[]> {
     try {
-      const response: Category = await axios.get(
+      const response: AxiosResponse<Tasks[]> = await axios.get(
+        `${this.baseUrl}/GetTasks`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Failed to fetch tasks: ${error}`);
+    }
+  }
+
+  // Получение всех категорий
+  async getCategories(): Promise<Category[]> {
+    try {
+      const response: AxiosResponse<Category[]> = await axios.get(
         `${this.baseUrl}/GetCategories`
       );
-      console.log(response);
-      return response;
+      return response.data;
     } catch (error) {
       console.error(error);
-      throw new Error(`${error}, Failed to fetch`);
+      throw new Error(`Failed to fetch categories: ${error}`);
     }
   }
-  // удаляем тудушку
-  async removeTask(taskId: number) {
-    await axios
-      .post(`${this.baseUrl}/RemoveTask/${taskId}`)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Удаление задачи
+  async removeTask(taskId: number): Promise<Tasks> {
+    return this.post<Tasks>(`/RemoveTask/${taskId}`);
   }
-  // удаляем категорию
-  async removeCategory(categoryId: number) {
-    await axios
-      .post(`${this.baseUrl}/RemoveCategory/${categoryId}`)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Удаление категории
+  async removeCategory(categoryId: number): Promise<Category> {
+    return this.post<Category>(`/RemoveCategory/${categoryId}`);
   }
-  // добавляем тудушку
-  async addTask(body: Tasks) {
-    await axios
-      .post(`${this.baseUrl}/AddTask`, {
-        id: body.id,
-        name: body,
-        description: body.description,
-        categoryId: body.categoryId,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Добавление задачи
+  async addTask(body: Tasks): Promise<Tasks> {
+    const payload = {
+      id: body.id,
+      name: body.name,
+      description: body.description,
+      categoryId: body.categoryId,
+    };
+    return this.post<Tasks>('/AddTask', payload);
   }
-  // добавляем категорию
-  async addCategory(body: Category) {
-    await axios
-      .post(`${this.baseUrl}/AddCategory`, {
-        id: body.id,
-        name: body,
-        description: body.description,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Добавление категории
+  async addCategory(body: Category): Promise<Category> {
+    const payload = {
+      id: body.id,
+      name: body.name,
+      description: body.description,
+    };
+    return this.post<Category>('/AddCategory', payload);
   }
-  // обновляем тудушку
-  async updateTask(body: Tasks) {
-    await axios
-      .post(`${this.baseUrl}/UpdateTask`, {
-        id: body.id,
-        name: body,
-        description: body.description,
-        categoryId: body.categoryId,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Обновление задачи
+  async updateTask(body: Tasks): Promise<Tasks> {
+    const payload = {
+      id: body.id,
+      name: body.name,
+      description: body.description,
+      categoryId: body.categoryId,
+    };
+    return this.post<Tasks>('/UpdateTask', payload);
   }
-  // обновляем категорию
-  async updateCategory(body: Category) {
-    await axios
-      .post(`${this.baseUrl}/UpdateCategory`, {
-        id: body.id,
-        name: body,
-        description: body.description,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  // Обновление категории
+  async updateCategory(body: Category): Promise<Category> {
+    const payload = {
+      id: body.id,
+      name: body.name,
+      description: body.description,
+    };
+    return this.post<Category>('/UpdateCategory', payload);
   }
 }
 
-const api = new Api('http://localhost:8089/api/ToDoList');
+const api = new Api('http://192.168.1.130:8089/api/ToDoList');
 
 export default api;
