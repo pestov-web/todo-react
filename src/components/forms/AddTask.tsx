@@ -9,7 +9,7 @@ interface Values {
 function AddTask() {
   return (
     <div>
-      <h1>Создание задачи</h1>
+      <h2>Создание задачи</h2>
       <Formik
         initialValues={{
           name: '',
@@ -28,39 +28,48 @@ function AddTask() {
       >
         <Form className="form">
           <label htmlFor="name" className="form__label">
-            Имя
-            <Field id="name" name="name" className="form__input " />
+            <Field
+              id="name"
+              name="name"
+              placeholder="Введите имя задачи"
+              className="form__input "
+            />
+            <span className="form__label-title">Название</span>
           </label>
 
           <label
             htmlFor="category"
             className="form__label form__label-category"
           >
-            Категория
             <Field
               as="select"
               id="category"
               name="category"
+              placeholder="Выберите категорию"
               className="form__input"
             />
+            <span className="form__label-title">Категория</span>
           </label>
 
           <label
             htmlFor="description"
             className="form__label form__label-description"
           >
-            Описание
             <Field
               as="textarea"
               id="description"
               name="description"
+              placeholder="Введите описание задачи"
               type="textarea"
               className="form__input form__input-textarea"
             />
+            <span className="form__label-title">Описание</span>
           </label>
 
-          <button type="submit">Создать</button>
-          <button type="submit">Закрыть</button>
+          <button className="button form__submit-btn" type="submit">
+            Создать
+          </button>
+          <button className="button form__close-btn">Закрыть</button>
         </Form>
       </Formik>
     </div>

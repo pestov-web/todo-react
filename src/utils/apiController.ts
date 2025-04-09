@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Category, Tasks } from '../types/api';
+import { Category, Task } from '../types/api';
 
 class Api {
   private baseUrl: string;
@@ -23,9 +23,9 @@ class Api {
   }
 
   // Получение всех задач
-  async getTasks(): Promise<Tasks[]> {
+  async getTasks(): Promise<Task[]> {
     try {
-      const response: AxiosResponse<Tasks[]> = await axios.get(
+      const response: AxiosResponse<Task[]> = await axios.get(
         `${this.baseUrl}/GetTasks`
       );
       return response.data;
@@ -49,8 +49,8 @@ class Api {
   }
 
   // Удаление задачи
-  async removeTask(taskId: number): Promise<Tasks> {
-    return this.post<Tasks>(`/RemoveTask/${taskId}`);
+  async removeTask(taskId: number): Promise<Task> {
+    return this.post<Task>(`/RemoveTask/${taskId}`);
   }
 
   // Удаление категории
@@ -59,14 +59,14 @@ class Api {
   }
 
   // Добавление задачи
-  async addTask(body: Tasks): Promise<Tasks> {
+  async addTask(body: Task): Promise<Task> {
     const payload = {
       id: body.id,
       name: body.name,
       description: body.description,
       categoryId: body.categoryId,
     };
-    return this.post<Tasks>('/AddTask', payload);
+    return this.post<Task>('/AddTask', payload);
   }
 
   // Добавление категории
@@ -80,14 +80,14 @@ class Api {
   }
 
   // Обновление задачи
-  async updateTask(body: Tasks): Promise<Tasks> {
+  async updateTask(body: Task): Promise<Task> {
     const payload = {
       id: body.id,
       name: body.name,
       description: body.description,
       categoryId: body.categoryId,
     };
-    return this.post<Tasks>('/UpdateTask', payload);
+    return this.post<Task>('/UpdateTask', payload);
   }
 
   // Обновление категории
@@ -101,6 +101,6 @@ class Api {
   }
 }
 
-const api = new Api('http://localhost:8089/api/ToDoList');
+const api = new Api('http://192.168.1.130:8089/api/ToDoList');
 
 export default api;

@@ -7,24 +7,48 @@
   padding: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 16px;
   &__label {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    position: relative;
+    padding: 1px;
+    &-title {
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      background-color: $secondary-color;
+      padding: 0 5px;
+    }
     &-description {
       grid-column: span 2;
     }
   }
   &__input {
-    border: 1px solid $primary-color;
-    border-radius: 10px;
+    background-color: $secondary-color;
     padding: 5px 10px;
     font-size: 16px;
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    @include border;
+    &-textarea {
+      padding: 10px;
+      min-height: 72px;
+      max-width: 800px;
+      width: 100%;
+    }
   }
-  &__textarea {
-    border: 1px solid $primary-color;
-    border-radius: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
+  &__submit-btn {
+    height: 46px;
+    width: 200px;
+    background-color: $primary-color;
+    color: $text-white;
+    justify-self: end;
+  }
+  &__close-btn {
+    height: 46px;
+    width: 112px;
+    color: $primary-color;
+    @include border;
+    justify-self: end;
   }
 }

@@ -22,3 +22,7 @@
     @content;
   }
 }
+@mixin border {
+  border: 2px solid $primary-color;
+  border-radius: 4px;
+}
