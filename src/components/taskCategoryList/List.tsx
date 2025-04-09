@@ -3,15 +3,8 @@ import api from '../../utils/apiController';
 import { Tasks, Category } from '../../types/api';
 import ListItem from './ListItem';
 import ListSkeleton from './ListSkeleton';
-import Modal from 'react-modal';
 
-function List({
-  setIsOpen,
-  modalIsOpen,
-}: {
-  setIsOpen: (isOpen: boolean) => void;
-  modalIsOpen: boolean;
-}) {
+function List() {
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,10 +30,6 @@ function List({
     fetchData();
   }, []);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   if (loading) return <ListSkeleton />;
 
   return (
@@ -57,23 +46,6 @@ function List({
           );
         })}
       </ul>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        // style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
     </>
   );
 }

@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import AddTask from './components/forms/AddTask';
 import Header from './components/Header';
 import List from './components/taskCategoryList/List';
 
 function App() {
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
-      <Header setIsOpen={setIsOpen} />
+      <Header />
       <main className="main">
-        <List setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
+        <List />
+        <section>
+          <AddTask />
+        </section>
       </main>
     </>
   );
