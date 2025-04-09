@@ -15,10 +15,10 @@ function ListItem({ task, category }: { task: Tasks; category?: Category }) {
         <p className="list-item__description">{task.description}</p>
       </div>
       <div className="list-item__actions">
-        <button className="list-item__button">
+        <button className="button list-item__button">
           <Icon icon="mdi:edit" className="list-item__button-icon" />
         </button>
-        <button className="list-item__button">
+        <button className="button list-item__button">
           <Icon icon="mdi:delete" className="list-item__button-icon" />
         </button>
       </div>

@@ -1,15 +1,15 @@
 // abstract
 @import 'abstracts/_variables.scss';
 @import 'abstracts/_mixins.scss';
-// layout
-@import 'layout/_layout.scss';
 // base
 @import 'base/_reset.scss';
 @import 'base/_typography.scss';
-
+// layout
+@import 'layout/_layout.scss';
 // import components
 @import 'components/Header.scss';
 @import 'components/NavMenu.scss';
 @import 'components/taskCategoryList/List.scss';
 @import 'components/taskCategoryList/ListItem.scss';
 @import 'components/taskCategoryList/ListSkeleton.scss';
+@import 'components/ui/Modal.scss';

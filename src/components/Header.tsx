@@ -6,6 +6,7 @@ function Header() {
       <div className="header__container">
         <h1 className="header__title">ToDo List</h1>
         <NavMenu />
+        <button className="button header__button">Добавить задачу</button>
       </div>
     </header>
   );

@@ -4,9 +4,23 @@
     display: flex;
     margin: 0;
     padding: 0;
-    gap: 19px;
+    gap: 8px;
+
     &-item {
       position: relative;
+      &:not(:last-child) {
+        ::after {
+          content: '|';
+          margin-left: 8px;
+          color: $secondary-color;
+        }
+      }
+      &-link {
+        color: $secondary-color;
+        &:hover {
+          color: $link-active-color;
+        }
+      }
     }
   }
 }

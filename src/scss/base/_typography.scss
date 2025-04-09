@@ -1,16 +1,18 @@
 @font-face {
   font-family: 'Roboto';
-  src: url(../../assets/fonts/Roboto/Roboto-Regular.ttf) format('ttf');
+  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url(../../assets/fonts/Roboto/Roboto-Medium.ttf) format('ttf');
+  src: url('../assets/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
   font-weight: 500;
+  font-style: normal;
 }
 
 body {
-  font-size: 18px;
   font-family: 'Roboto', sans-serif;
+  font-size: 18px;
 }

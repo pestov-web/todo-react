@@ -8,9 +8,20 @@
     align-items: center;
     padding: 1rem 0;
     gap: 65px;
+    width: 100%;
   }
   &__title {
     margin: 0;
     color: $text-white;
+  }
+  &__button {
+    color: $text-white;
+    font-size: 20px;
+    margin-left: auto;
+    padding: 10px;
+    &:hover {
+      background-color: $secondary-color;
+      color: $text-blue;
+    }
   }
 }

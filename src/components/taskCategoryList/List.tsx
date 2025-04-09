@@ -29,7 +29,6 @@ function List() {
     }
     fetchData();
   }, []);
-  // тут будет скелетон
   if (loading) return <ListSkeleton />;
 
   return (
