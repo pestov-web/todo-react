@@ -1,12 +1,12 @@
 import Header from './components/Header';
-import TaskList from './components/TaskList';
+import List from './components/taskCategoryList/List';
 
 function App() {
   return (
     <>
       <Header />
       <main className="main">
-        <TaskList />
+        <List />
       </main>
     </>
   );

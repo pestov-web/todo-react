@@ -101,6 +101,6 @@ class Api {
   }
 }
 
-const api = new Api('http://192.168.1.130:8089/api/ToDoList');
+const api = new Api('http://localhost:8089/api/ToDoList');
 
 export default api;

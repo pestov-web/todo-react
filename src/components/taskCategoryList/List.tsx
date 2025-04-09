@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import api from '../utils/apiController';
-import { Tasks, Category } from '../types/api';
+import api from '../../utils/apiController';
+import { Tasks, Category } from '../../types/api';
+import ListItem from './ListItem';
+import ListSkeleton from './ListSkeleton';
 
-function TaskList() {
+function List() {
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,45 +21,33 @@ function TaskList() {
       } catch (error) {
         console.error('Ошибка при загрузке:', error);
       } finally {
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 5000);
         setLoading(false);
       }
     }
     fetchData();
   }, []);
-
-  if (loading) return <div>Загрузка...</div>;
+  // тут будет скелетон
+  if (loading) return <ListSkeleton />;
 
   return (
-    <div>
-      <h2>Задачи</h2>
-      <ul>
+    <>
+      <ul className="list">
         {tasks.map((task) => {
           const category = categories.find(
             (item) => item.id === task.categoryId
           );
           return (
-            <li key={task.id}>
-              <strong>{task.name}</strong> — {task.description}
-              {category && (
-                <div style={{ fontSize: '0.85em', color: '#888' }}>
-                  Категория: {category.name}
-                </div>
-              )}
+            <li key={task.id} className="list__item">
+              <ListItem task={task} category={category} />
             </li>
           );
         })}
       </ul>
-
-      <h2>Категории</h2>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <strong>{category.name}</strong> — {category.description}
-          </li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 }
 
-export default TaskList;
+export default List;
