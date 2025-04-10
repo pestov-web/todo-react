@@ -1,45 +1,69 @@
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import { Category, Task } from '../../types/api';
+import { Formik, Field, Form } from 'formik';
+import { Category, Task, TaskModal } from '../../types/api';
 import * as Yup from 'yup';
-
-interface Values {
-  name: string;
-  category: string | number;
-  description: string;
-}
+import api from '../../utils/apiController';
 
 function TaskForm({
   task,
+  tasks,
   categories,
+  setTasks,
+  setTaskModal,
 }: {
   task?: Task;
+  tasks: Task[];
   categories: Category[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  setTaskModal: React.Dispatch<React.SetStateAction<TaskModal>>;
 }) {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .max(255, 'Максимум 255 символов')
       .required('Введите название задачи!'),
-    category: Yup.string().required('Введите категорию задачи!'),
+    categoryId: Yup.string().required('Введите категорию задачи!'),
     description: Yup.string().max(1536, 'Максимум 1536 символов'),
   });
+
+  const handleSubmit = (values: Task) => {
+    if (task) {
+      console.log(`updating task: ${JSON.stringify(values)}`);
+    } else {
+      values.categoryId = Number(values.categoryId);
+      console.log(`adding task: ${JSON.stringify(values)}`);
+      api
+        .addTask(values as Task)
+        .then((res) => {
+          setTasks([...tasks, res]);
+        })
+        .catch((err) => {
+          console.log(`ошибка: ${err}`);
+        })
+        .finally(() => {
+          setTaskModal({
+            isOpen: false,
+            values: {
+              id: null,
+              name: '',
+              categoryId: 'null',
+              description: '',
+            },
+          });
+        });
+    }
+  };
   return (
     <div>
       <h2>{task ? 'Редактирование задачи' : 'Добавление задачи'}</h2>
       <Formik
         initialValues={{
+          id: task ? task.id : 0,
           name: task ? task.name : '',
-          category: task ? task.categoryId : '',
+          categoryId: task ? task.categoryId : null,
           description: task ? task.description : '',
         }}
         validationSchema={validationSchema}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+        onSubmit={(values: Task) => {
+          handleSubmit(values);
         }}
       >
         {({ errors }) => (
@@ -66,8 +90,8 @@ function TaskForm({
             >
               <Field
                 as="select"
-                id="category"
-                name="category"
+                id="categoryId"
+                name="categoryId"
                 placeholder="Выберите категорию"
                 className="form__input form__input-select"
                 required
@@ -78,7 +102,7 @@ function TaskForm({
                 {categories.map((category: Category) => (
                   <option
                     key={category.id}
-                    value={category.id}
+                    value={category.id ?? ''}
                     className="form__input-option"
                   >
                     {category.name}
@@ -88,7 +112,7 @@ function TaskForm({
               <span className="form__label-title">
                 Категория{' '}
                 <span className="form__label-error">
-                  {errors.category ? '*' : ''}
+                  {errors.categoryId ? '*' : ''}
                 </span>
               </span>
             </label>
@@ -117,7 +141,22 @@ function TaskForm({
               <button className="button form__submit-btn" type="submit">
                 Создать
               </button>
-              <button className="button form__close-btn">Закрыть</button>
+              <button
+                className="button form__close-btn"
+                onClick={() =>
+                  setTaskModal({
+                    isOpen: false,
+                    values: {
+                      id: null,
+                      name: '',
+                      categoryId: null,
+                      description: '',
+                    },
+                  })
+                }
+              >
+                Закрыть
+              </button>
             </div>
           </Form>
         )}

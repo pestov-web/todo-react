@@ -1,11 +1,13 @@
-import { Task, Category } from '../../types/api';
+import { Task, Category, DeleteModal } from '../../types/api';
 import { Icon } from '@iconify/react';
 function ListItem({
   data,
   category,
+  setDeleteModal,
 }: {
   data: Task | Category;
   category?: Category;
+  setDeleteModal: React.Dispatch<React.SetStateAction<DeleteModal>>;
 }) {
   return (
     <div className="list-item">
@@ -26,7 +28,17 @@ function ListItem({
           <Icon icon="mdi:edit" className="list-item__button-icon" />
         </button>
         <button className="button list-item__button">
-          <Icon icon="mdi:delete" className="list-item__button-icon" />
+          <Icon
+            icon="mdi:delete"
+            className="list-item__button-icon"
+            onClick={() =>
+              setDeleteModal({
+                isOpen: true,
+                elementId: data.id,
+                type: 'categoryId' in data ? 'task' : 'category',
+              })
+            }
+          />
         </button>
       </div>
     </div>

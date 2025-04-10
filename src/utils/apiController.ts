@@ -49,13 +49,29 @@ class Api {
   }
 
   // Удаление задачи
-  async removeTask(taskId: number): Promise<Task> {
-    return this.post<Task>(`/RemoveTask/${taskId}`);
+  async removeTask(taskId: number): Promise<number> {
+    try {
+      const response: AxiosResponse = await axios.get(
+        `${this.baseUrl}/RemoveTask/${taskId}`
+      );
+      return response.status;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Failed to delete task: ${error}`);
+    }
   }
 
   // Удаление категории
-  async removeCategory(categoryId: number): Promise<Category> {
-    return this.post<Category>(`/RemoveCategory/${categoryId}`);
+  async removeCategory(categoryId: number): Promise<number> {
+    try {
+      const response: AxiosResponse = await axios.get(
+        `${this.baseUrl}/RemoveCategory/${categoryId}`
+      );
+      return response.status;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Failed to delete task: ${error}`);
+    }
   }
 
   // Добавление задачи

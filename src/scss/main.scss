@@ -6,7 +6,7 @@
 @import 'base/_typography.scss';
 // layout
 @import 'layout/_layout.scss';
-// import components
+// components
 @import 'components/Header.scss';
 @import 'components/NavMenu.scss';
 @import 'components/taskCategoryList/List.scss';
@@ -14,3 +14,4 @@
 @import 'components/taskCategoryList/ListSkeleton.scss';
 @import 'components/ui/Modal.scss';
 @import 'components/ui/Form.scss';
+@import 'components/ui/DeleteDialog.scss';

@@ -5,7 +5,7 @@ function NavMenu() {
     <nav className="nav">
       <ul className="nav__list">
         {navMenu.map((item) => (
-          <li key={item.name} className="nav__list-item">
+          <li key={item.id} className="nav__list-item">
             <Link to={item.href} className="nav__list-item-link">
               {item.name}
             </Link>
