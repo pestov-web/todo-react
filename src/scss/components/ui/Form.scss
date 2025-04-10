@@ -40,10 +40,17 @@
       width: 100%;
       height: fit-content;
     }
+    // :optional
+    &-select {
+      &:invalid {
+        color: $text-grey;
+      }
+    }
+    &-option {
+      color: $text-black;
+    }
   }
-  &__option {
-    color: $error-color;
-  }
+
   &__buttons-container {
     grid-column: span 2;
     justify-self: end;

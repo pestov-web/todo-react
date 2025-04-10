@@ -101,6 +101,8 @@ class Api {
   }
 }
 
-const api = new Api('http://localhost:8089/api/ToDoList');
+const api = new Api(
+  import.meta.env.VITE_API_URL || 'http://localhost:8089/api/ToDoList'
+);
 
 export default api;

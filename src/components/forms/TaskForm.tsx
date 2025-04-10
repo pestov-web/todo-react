@@ -49,7 +49,8 @@ function TaskForm({
                 id="name"
                 name="name"
                 placeholder="Введите имя задачи"
-                className="form__input "
+                className="form__input"
+                required
               />
               <span className="form__label-title">
                 Название{' '}
@@ -68,19 +69,24 @@ function TaskForm({
                 id="category"
                 name="category"
                 placeholder="Выберите категорию"
-                className="form__input"
+                className="form__input form__input-select"
+                required
               >
-                <option value="" className="form__option">
+                <option value="" disabled selected>
                   Выберите категорию
                 </option>
                 {categories.map((category: Category) => (
-                  <option key={category.id} value={category.id}>
+                  <option
+                    key={category.id}
+                    value={category.id}
+                    className="form__input-option"
+                  >
                     {category.name}
                   </option>
                 ))}
               </Field>
               <span className="form__label-title">
-                Категория
+                Категория{' '}
                 <span className="form__label-error">
                   {errors.category ? '*' : ''}
                 </span>
@@ -100,7 +106,7 @@ function TaskForm({
                 className="form__input form__input-textarea"
               />
               <span className="form__label-title">
-                Описание
+                Описание{' '}
                 <span className="form__label-error">
                   {errors.description ? '*' : ''}
                 </span>
