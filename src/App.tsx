@@ -5,7 +5,7 @@ import List from './components/taskCategoryList/List';
 import { useEffect, useState } from 'react';
 import { Category, Task } from './types/api';
 import api from './utils/apiController';
-import AddTask from './components/forms/AddTask';
+import TaskForm from './components/forms/TaskForm';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -47,7 +47,10 @@ function App() {
             path="/categories"
             element={<List data={categories} loading={loading} />}
           />{' '}
-          <Route path="/testform" element={<AddTask />} />
+          <Route
+            path="/testform"
+            element={<TaskForm categories={categories} />}
+          />
         </Routes>
       </main>
     </>

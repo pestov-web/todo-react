@@ -16,7 +16,10 @@
       top: -10px;
       left: 10px;
       background-color: $secondary-color;
-      padding: 0 5px;
+      padding: 0 3px;
+    }
+    &-error {
+      color: $error-color;
     }
     &-description {
       grid-column: span 2;
@@ -35,7 +38,17 @@
       min-height: 72px;
       max-width: 800px;
       width: 100%;
+      height: fit-content;
     }
+  }
+  &__option {
+    color: $error-color;
+  }
+  &__buttons-container {
+    grid-column: span 2;
+    justify-self: end;
+    display: flex;
+    gap: 24px;
   }
   &__submit-btn {
     height: 46px;
@@ -43,12 +56,13 @@
     background-color: $primary-color;
     color: $text-white;
     justify-self: end;
+    @include border;
   }
   &__close-btn {
     height: 46px;
     width: 112px;
     color: $primary-color;
-    @include border;
     justify-self: end;
+    @include border;
   }
 }
